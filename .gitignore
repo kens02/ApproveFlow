@@ -1,0 +1,40 @@
+# OS artifacts
+.DS_Store
+$HOME/.nvm/nvm.sh
+$HOME/.nvm/nvm-exec
+nvm-exec
+nvm.sh
+
+# Logs
+*.log
+logs/
+
+# Database files
+*.db
+*.db-shm
+*.db-wal
+
+# .NET build artifacts
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+*.cache
+
+# User-local settings
+*.user
+*.suo
+*.swp
+
+# System prompt
+AGENTS.md
+
+# Node.js / TypeScript artifacts
+node_modules/
+dist/
+coverage/
+.env
+.next/
+out/
+build/
