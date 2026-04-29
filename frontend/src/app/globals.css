@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #f6f1e8;
+  --paper: #fffdf7;
+  --ink: #172121;
+  --accent: #0d7c66;
+  --warn: #b8405e;
+  --line: #d7d1c4;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  color: var(--ink);
+  font-family: "IBM Plex Sans", "Hiragino Kaku Gothic ProN", sans-serif;
+  background: radial-gradient(circle at 20% 10%, #fff6dc 0%, var(--bg) 60%);
+}
+
+.page { max-width: 1100px; margin: 0 auto; padding: 24px; display: grid; gap: 16px; }
+.hero { background: linear-gradient(120deg, #0d7c66, #146c94); color: #fff; border-radius: 16px; padding: 20px; }
+.hero h1 { margin: 0 0 8px; font-family: "M PLUS 1p", sans-serif; letter-spacing: 0.04em; }
+.status { margin-top: 10px; background: rgba(255,255,255,0.18); padding: 8px 12px; border-radius: 10px; }
+.card { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 16px; box-shadow: 0 6px 16px rgba(20,20,20,0.06); }
+.grid { display: grid; gap: 8px; }
+.cols2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+label { font-size: 12px; font-weight: 700; letter-spacing: 0.04em; }
+input, textarea, select, button { font: inherit; }
+input, textarea, select { border: 1px solid var(--line); border-radius: 8px; padding: 8px; background: #fff; }
+button { border: 0; border-radius: 10px; padding: 10px 14px; background: var(--accent); color: #fff; cursor: pointer; }
+button:hover { filter: brightness(0.95); }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.inline { display: flex; align-items: center; gap: 8px; }
+.routeList { display: grid; gap: 8px; margin: 8px 0; }
+.routeRow { display: grid; grid-template-columns: 80px 1fr 1fr; gap: 8px; align-items: center; }
+.tableWrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th, td { border-bottom: 1px solid var(--line); padding: 8px; text-align: left; }
+.balance { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+.bars { margin-top: 10px; display: grid; gap: 8px; }
+.barRow { display: grid; grid-template-columns: 60px 1fr 80px; gap: 10px; align-items: center; }
+.bar { height: 12px; border-radius: 999px; background: linear-gradient(90deg, var(--accent), #22b3b8); }
+
+@media (max-width: 768px) {
+  .cols2 { grid-template-columns: 1fr; }
+  .routeRow { grid-template-columns: 1fr; }
+}
