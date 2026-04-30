@@ -68,3 +68,8 @@ export interface DashboardSummary {
   remainingDays: number;
   monthlyStats: MonthlyStat[];
 }
+
+export interface DevTokenResponse {
+  accessToken: string;
+  expiresAtUtc: string;
+}
