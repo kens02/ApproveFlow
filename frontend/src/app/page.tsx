@@ -73,6 +73,15 @@ export default function Home() {
     setMessage(v ? "Token loaded" : "No token in localStorage");
   }
 
+  async function onCreateAdminToken() {
+    await wrap("Create admin token", async () => {
+      const response = await api.getDevToken(applicantId, applicantName, "Administrator");
+      setToken(response.accessToken);
+      window.localStorage.setItem("approveflow-token", response.accessToken);
+      setMessage(`Admin token created (exp: ${new Date(response.expiresAtUtc).toLocaleString()})`);
+    });
+  }
+
   async function onCreateRequest(e: FormEvent) {
     e.preventDefault();
     await wrap("Create request", async () => {
@@ -161,7 +170,11 @@ export default function Home() {
           <div className="actions">
             <button type="submit">Save Token</button>
             <button type="button" onClick={onLoadToken}>Load Token</button>
+            <button type="button" onClick={onCreateAdminToken}>Get Admin Dev Token</button>
           </div>
+          <small>
+            Save Route requires Administrator role. If you see 401/403, generate a dev admin token and retry.
+          </small>
         </form>
       </section>
 

@@ -1,6 +1,7 @@
 import {
   ActionInput,
   DashboardSummary,
+  DevTokenResponse,
   LeaveBalanceSummary,
   LeaveRequestPayload,
   LeaveRequestSummary,
@@ -20,7 +21,14 @@ async function request<T>(path: string, init: RequestInit, fallbackError: string
   const response = await fetch(`${baseUrl}${path}`, init);
   if (!response.ok) {
     const text = await response.text();
-    throw new Error(text || fallbackError);
+    const body = text || fallbackError;
+    if (response.status === 401) {
+      throw new Error(`401 Unauthorized: ${body}`);
+    }
+    if (response.status === 403) {
+      throw new Error(`403 Forbidden: ${body}`);
+    }
+    throw new Error(body);
   }
 
   if (response.status === 204) {
@@ -31,6 +39,13 @@ async function request<T>(path: string, init: RequestInit, fallbackError: string
 }
 
 export const api = {
+  getDevToken(userId: string, userName: string, role = "Administrator") {
+    return request<DevTokenResponse>("/api/auth/dev-token", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userId, userName, role }),
+    }, "Failed to get dev token");
+  },
   createRequest(token: string, payload: LeaveRequestPayload) {
     return request<LeaveRequestSummary>("/api/leave-requests", {
       method: "POST",
